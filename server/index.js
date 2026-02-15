@@ -5,15 +5,24 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { getDb, initDb } from './db.js';
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json());
+
+// ── Serve Vite-built static files ──
+const distPath = path.join(__dirname, '..', 'dist');
+app.use(express.static(distPath));
 
 // ── POST /api/wallets — Submit a wallet ──
 app.post('/api/wallets', async (req, res) => {
@@ -86,6 +95,15 @@ app.get('/api/wallets', async (req, res) => {
     } catch (err) {
         console.error('Error listing wallets:', err);
         res.status(500).json({ error: 'server', message: 'Failed to list wallets' });
+    }
+});
+
+// ── SPA Fallback — serve index.html for all non-API routes ──
+app.use((req, res, next) => {
+    if (req.method === 'GET' && !req.path.startsWith('/api/')) {
+        res.sendFile(path.join(distPath, 'index.html'));
+    } else {
+        next();
     }
 });
 

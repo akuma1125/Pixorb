@@ -7,6 +7,8 @@
     "dev": "vite",
     "server": "node server/index.js",
     "build": "vite build",
+    "render-build": "npm install && npm run build",
+    "start": "node server/index.js",
     "preview": "vite preview"
   },
   "devDependencies": {

@@ -1,0 +1,16 @@
+# ══════════════════════════════════════════════
+# Pixorb — Render Blueprint
+# ══════════════════════════════════════════════
+
+services:
+  - type: web
+    name: pixorb
+    runtime: node
+    plan: free
+    buildCommand: npm run render-build
+    startCommand: npm run start
+    envVars:
+      - key: DATABASE_URL
+        sync: false  # set manually in Render dashboard
+      - key: NODE_ENV
+        value: production
