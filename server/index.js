@@ -24,10 +24,10 @@ app.use(express.json());
 const distPath = path.join(__dirname, '..', 'dist');
 app.use(express.static(distPath));
 
-// ── POST /api/wallets — Submit a wallet ──
+// ── POST /api/wallets — Submit a wallet + handle ──
 app.post('/api/wallets', async (req, res) => {
     try {
-        const { address } = req.body;
+        const { address, handle } = req.body;
 
         if (!address || !/^0x[a-fA-F0-9]{40}$/.test(address)) {
             return res.status(400).json({
@@ -37,12 +37,13 @@ app.post('/api/wallets', async (req, res) => {
         }
 
         const normalizedAddress = address.toLowerCase();
+        const cleanHandle = (handle || '').trim().slice(0, 100);
         const sql = getDb();
 
         try {
             await sql`
-        INSERT INTO wallets (address)
-        VALUES (${normalizedAddress})
+        INSERT INTO wallets (address, handle)
+        VALUES (${normalizedAddress}, ${cleanHandle || null})
       `;
             return res.json({ success: true, message: 'Wallet added to allowlist' });
         } catch (err) {
@@ -66,13 +67,13 @@ app.get('/api/wallets/csv', async (req, res) => {
     try {
         const sql = getDb();
         const wallets = await sql`
-      SELECT address, created_at FROM wallets ORDER BY created_at ASC
+      SELECT address, handle, created_at FROM wallets ORDER BY created_at ASC
     `;
 
-        // Build CSV
-        let csv = 'address,created_at\n';
+        let csv = 'address,handle,created_at\n';
         for (const w of wallets) {
-            csv += `${w.address},${w.created_at}\n`;
+            const h = (w.handle || '').replace(/,/g, '');
+            csv += `${w.address},${h},${w.created_at}\n`;
         }
 
         res.setHeader('Content-Type', 'text/csv');
@@ -89,7 +90,7 @@ app.get('/api/wallets', async (req, res) => {
     try {
         const sql = getDb();
         const wallets = await sql`
-      SELECT address, created_at FROM wallets ORDER BY created_at ASC
+      SELECT address, handle, created_at FROM wallets ORDER BY created_at ASC
     `;
         res.json({ count: wallets.length, wallets });
     } catch (err) {

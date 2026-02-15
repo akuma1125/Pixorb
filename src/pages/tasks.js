@@ -1,5 +1,5 @@
 // ══════════════════════════════════════════════
-// PIXORB — Twitter Tasks Page
+// PIXORB — Phase 2: Social Tasks (Degen Edition)
 // Link must be clicked before task can be marked complete
 // ══════════════════════════════════════════════
 
@@ -8,27 +8,31 @@ import { navigate } from '../router.js';
 const tasks = [
   {
     id: 'follow',
-    label: 'Follow <a href="https://twitter.com/Pixorb" target="_blank" rel="noopener">@Pixorb</a> on Twitter',
-  },
-  {
-    id: 'retweet',
-    label: 'Retweet the <a href="https://twitter.com/Pixorb" target="_blank" rel="noopener">pinned tweet</a>',
+    label: 'Follow <a href="https://twitter.com/Pixorb" target="_blank" rel="noopener">PIXORB</a>',
+    icon: '👾',
   },
   {
     id: 'like',
     label: 'Like the <a href="https://twitter.com/Pixorb" target="_blank" rel="noopener">pinned tweet</a>',
+    icon: '❤️',
+  },
+  {
+    id: 'quote',
+    label: 'Quote the <a href="https://twitter.com/Pixorb" target="_blank" rel="noopener">pinned tweet</a>',
+    caption: 'caption: "pixorb degen" & tag 3 orbs',
+    icon: '🔁',
   },
 ];
 
 export function renderTasks(container) {
   const completed = new Set();
-  const linkClicked = new Set(); // tracks which task links have been clicked
+  const linkClicked = new Set();
 
   const el = document.createElement('div');
   el.className = 'glass-panel';
   el.innerHTML = `
     <h1>Pixorb</h1>
-    <h2>Complete Tasks</h2>
+    <h2>prove you're degen.</h2>
     <ul class="task-list" id="task-list">
       ${tasks
       .map(
@@ -37,7 +41,11 @@ export function renderTasks(container) {
           <div class="task-checkbox">
             <span class="task-checkbox-tick">✓</span>
           </div>
-          <span class="task-label">${task.label}</span>
+          <div class="task-content">
+            <span class="task-icon">${task.icon}</span>
+            <span class="task-label">${task.label}</span>
+            ${task.caption ? `<span class="task-caption">${task.caption}</span>` : ''}
+          </div>
         </li>
       `
       )
@@ -73,32 +81,24 @@ export function renderTasks(container) {
   taskItems.forEach((item) => {
     const id = item.dataset.id;
 
-    // Track link clicks within this task
     const link = item.querySelector('a');
     if (link) {
-      link.addEventListener('click', (e) => {
-        // Let the link open normally, but mark as visited
+      link.addEventListener('click', () => {
         linkClicked.add(id);
-        // Small visual hint that they can now check the box
         item.classList.add('link-visited');
       });
     }
 
-    // Click on the task item (not the link) to toggle completion
     item.addEventListener('click', (e) => {
-      // If they clicked the link itself, don't toggle — let it navigate
       if (e.target.tagName === 'A') return;
 
-      // Must click link first
       if (!linkClicked.has(id)) {
-        showHint('Click the link first to complete this task');
-        // Shake animation
+        showHint('click the link first, degen');
         item.classList.add('shake');
         setTimeout(() => item.classList.remove('shake'), 500);
         return;
       }
 
-      // Toggle completion
       if (completed.has(id)) {
         completed.delete(id);
         item.classList.remove('completed');

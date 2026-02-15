@@ -358,6 +358,132 @@ p {
   margin-bottom: 40px;
 }
 
+/* ── Home Hero — Image Button ── */
+.home-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 1s ease, transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.home-hero.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.home-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 3.2rem;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 60px var(--primary-glow);
+}
+
+.home-tagline {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.05rem;
+  letter-spacing: 6px;
+  text-transform: lowercase;
+  color: var(--text-secondary);
+  opacity: 0.7;
+  animation: taglinePulse 3s ease-in-out infinite;
+}
+
+@keyframes taglinePulse {
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.orb-image-wrapper {
+  position: relative;
+  width: 420px;
+  height: 420px;
+  cursor: pointer;
+  border-radius: 32px;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+  animation: orbFloat 4s ease-in-out infinite;
+  outline: none;
+}
+
+.orb-image-wrapper:hover {
+  transform: scale(1.06);
+  box-shadow:
+    0 0 80px rgba(0, 255, 204, 0.25),
+    0 0 160px rgba(0, 255, 204, 0.1);
+}
+
+.orb-image-wrapper:active,
+.orb-image-wrapper.orb-clicked {
+  transform: scale(0.92);
+  transition: transform 0.15s ease;
+}
+
+.orb-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 32px;
+  display: block;
+  filter: drop-shadow(0 0 40px rgba(0, 255, 204, 0.35));
+}
+
+.orb-image-glow {
+  position: absolute;
+  inset: -20px;
+  border-radius: 44px;
+  background: radial-gradient(circle, rgba(0, 255, 204, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes orbFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.orb-image-wrapper:hover {
+  animation: none;
+  transform: scale(1.06) translateY(-6px);
+}
+
+@keyframes glowPulse {
+
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
 /* ── Page Transitions ── */
 .page-exit {
   animation: pageOut 0.35s ease forwards;
@@ -435,6 +561,176 @@ p {
 
 .task-item.shake {
   animation: shake 0.4s ease;
+}
+
+/* ── Phase Tagline ── */
+.phase-tagline {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  text-transform: lowercase;
+  letter-spacing: 2px;
+  margin-bottom: 28px;
+  font-style: italic;
+}
+
+/* ── Task Content (icon + label + caption) ── */
+.task-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.task-icon {
+  display: none;
+}
+
+.task-item .task-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.task-item .task-icon {
+  display: inline;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.task-caption {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-top: 2px;
+  margin-left: 28px;
+}
+
+/* ── Divider OR ── */
+.divider-or {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 20px 0;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.divider-or::before,
+.divider-or::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-glow), transparent);
+}
+
+/* ── Connect Wallet Button ── */
+.btn-connect {
+  width: 100%;
+  background: rgba(0, 255, 204, 0.08);
+  border: 1px solid var(--border-glow);
+}
+
+.btn-connect:hover {
+  background: rgba(0, 255, 204, 0.15);
+}
+
+.btn-success {
+  background: rgba(0, 255, 136, 0.15) !important;
+  border-color: var(--success) !important;
+  color: var(--success) !important;
+}
+
+.input-field.connected {
+  border-color: var(--success);
+  color: var(--success);
+}
+
+/* ── Confirmation Panel ── */
+.confirmation-panel {
+  text-align: center;
+}
+
+.confirm-icon {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  animation: confirmPulse 2s ease-in-out infinite;
+}
+
+@keyframes confirmPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.1);
+    opacity: 0.85;
+  }
+}
+
+.confirmation-panel h1 {
+  font-size: 1.6rem;
+  letter-spacing: 3px;
+  text-transform: lowercase;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.confirm-tagline {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  letter-spacing: 2px;
+  text-transform: lowercase;
+  font-style: italic;
+  margin-bottom: 24px;
+}
+
+.confirm-wallet {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: var(--primary-dim);
+  background: rgba(0, 255, 204, 0.06);
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border-glow);
+  margin-bottom: 24px;
+  display: inline-block;
+}
+
+/* ── Share Button ── */
+.btn-share {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.btn-share svg {
+  flex-shrink: 0;
+}
+
+.confirm-footer {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  letter-spacing: 3px;
+  text-transform: lowercase;
+  opacity: 0.5;
+  margin-top: 8px;
 }
 
 /* ══════════════════════════════════════════════
@@ -526,6 +822,21 @@ p {
     height: 64px;
     font-size: 28px;
   }
+
+  .orb-image-wrapper {
+    width: 280px;
+    height: 280px;
+  }
+
+  .home-title {
+    font-size: 2.2rem;
+    letter-spacing: 6px;
+  }
+
+  .home-tagline {
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+  }
 }
 
 /* Small phones */
@@ -547,5 +858,15 @@ p {
 
   .task-label {
     font-size: 0.82rem;
+  }
+
+  .orb-image-wrapper {
+    width: 200px;
+    height: 200px;
+  }
+
+  .home-title {
+    font-size: 1.6rem;
+    letter-spacing: 4px;
   }
 }

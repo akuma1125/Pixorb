@@ -1,31 +1,38 @@
 // ══════════════════════════════════════════════
-// PIXORB — Home Page (5s delay entrance)
+// PIXORB — Home Page (Image Button)
 // ══════════════════════════════════════════════
 
 import { navigate } from '../router.js';
 
 export function renderHome(container) {
-    const el = document.createElement('div');
-    el.className = 'glass-panel home-panel delayed';
-    el.innerHTML = `
-    <h1>Pixorb</h1>
-    <p class="logo-subtitle">Enter the Orb</p>
-    <button class="btn-primary" id="enter-btn">
-      <span>Enter</span>
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M5 12h14M12 5l7 7-7 7"/>
-      </svg>
-    </button>
+  const el = document.createElement('div');
+  el.className = 'home-hero';
+  el.innerHTML = `
+    <div class="orb-image-wrapper" id="orb-btn" role="button" tabindex="0" aria-label="Enter Pixorb">
+      <img src="/pixorb.jpg" alt="Pixorb" class="orb-image" draggable="false" />
+      <div class="orb-image-glow"></div>
+    </div>
+    <h1 class="home-title">PIXORB</h1>
+    <p class="home-tagline">enter the orb</p>
   `;
-    container.appendChild(el);
+  container.appendChild(el);
 
-    // 5-second delay — let users see the 3D scene first
-    setTimeout(() => {
-        el.classList.remove('delayed');
-        el.classList.add('revealed');
-    }, 5000);
+  // Entrance animation
+  requestAnimationFrame(() => {
+    el.classList.add('visible');
+  });
 
-    document.getElementById('enter-btn').addEventListener('click', () => {
-        navigate('/tasks');
-    });
+  const btn = document.getElementById('orb-btn');
+
+  btn.addEventListener('click', () => {
+    btn.classList.add('orb-clicked');
+    setTimeout(() => navigate('/identity'), 400);
+  });
+
+  btn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      btn.click();
+    }
+  });
 }
