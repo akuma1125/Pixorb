@@ -13,14 +13,15 @@ const tasks = [
   },
   {
     id: 'like',
-    label: 'Like the <a href="https://twitter.com/Pixorb" target="_blank" rel="noopener">pinned tweet</a>',
+    label: 'Like the <a href="https://x.com/pixorb/status/2024151977609891874" target="_blank" rel="noopener">pinned tweet</a>',
     icon: '❤️',
   },
   {
     id: 'quote',
-    label: 'Quote the <a href="https://twitter.com/Pixorb" target="_blank" rel="noopener">pinned tweet</a>',
+    label: 'Quote the <a href="https://x.com/pixorb/status/2024151977609891874" target="_blank" rel="noopener">pinned tweet</a>',
     caption: 'caption: "pixorb degen" & tag 3 orbs',
     icon: '🔁',
+    requiresUrl: true,
   },
 ];
 
@@ -45,6 +46,7 @@ export function renderTasks(container) {
             <span class="task-icon">${task.icon}</span>
             <span class="task-label">${task.label}</span>
             ${task.caption ? `<span class="task-caption">${task.caption}</span>` : ''}
+            ${task.requiresUrl ? `<input class="quote-url-input" data-task-id="${task.id}" type="url" placeholder="paste your quote tweet link" autocomplete="off" />` : ''}
           </div>
         </li>
       `
@@ -64,6 +66,7 @@ export function renderTasks(container) {
   const continueBtn = document.getElementById('continue-btn');
   const hintEl = document.getElementById('task-hint');
   const taskItems = document.querySelectorAll('.task-item');
+  const quoteTweetUrls = {};
 
   function updateContinue() {
     continueBtn.disabled = completed.size < tasks.length;
@@ -89,13 +92,31 @@ export function renderTasks(container) {
       });
     }
 
+    const urlInput = item.querySelector('.quote-url-input');
+    if (urlInput) {
+      urlInput.addEventListener('click', (e) => e.stopPropagation());
+      urlInput.addEventListener('input', () => {
+        quoteTweetUrls[id] = urlInput.value.trim();
+      });
+    }
+
     item.addEventListener('click', (e) => {
       if (e.target.tagName === 'A') return;
+      if (e.target.classList.contains('quote-url-input')) return;
 
       if (!linkClicked.has(id)) {
         showHint('click the link first, degen');
         item.classList.add('shake');
         setTimeout(() => item.classList.remove('shake'), 500);
+        return;
+      }
+
+      const task = tasks.find((t) => t.id === id);
+      if (task && task.requiresUrl && !quoteTweetUrls[id]) {
+        showHint('paste your quote tweet link first');
+        item.classList.add('shake');
+        setTimeout(() => item.classList.remove('shake'), 500);
+        if (urlInput) urlInput.focus();
         return;
       }
 
