@@ -204,6 +204,7 @@ p {
 .task-item {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 14px;
   padding: 16px 20px;
   margin-bottom: 12px;
@@ -613,9 +614,9 @@ p {
 
 .quote-url-input {
   display: block;
-  margin-top: 8px;
-  margin-left: 28px;
-  width: calc(100% - 28px);
+  width: 100%;
+  margin-top: 0;
+  margin-left: 0;
   padding: 7px 12px;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.15);

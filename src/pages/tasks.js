@@ -46,8 +46,8 @@ export function renderTasks(container) {
             <span class="task-icon">${task.icon}</span>
             <span class="task-label">${task.label}</span>
             ${task.caption ? `<span class="task-caption">${task.caption}</span>` : ''}
-            ${task.requiresUrl ? `<input class="quote-url-input" data-task-id="${task.id}" type="url" placeholder="paste your quote tweet link" autocomplete="off" />` : ''}
           </div>
+          ${task.requiresUrl ? `<input class="quote-url-input" data-task-id="${task.id}" type="url" placeholder="paste your quote tweet link" autocomplete="off" />` : ''}
         </li>
       `
       )
