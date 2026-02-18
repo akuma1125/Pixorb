@@ -13,13 +13,13 @@ const tasks = [
   },
   {
     id: 'like',
-    label: 'Like the <a href="https://x.com/pixorb/status/2024151977609891874" target="_blank" rel="noopener">pinned tweet</a>',
+    label: 'Like, retweet and tag three orbs on the <a href="https://x.com/pixorb/status/2024151977609891874" target="_blank" rel="noopener">pinned tweet</a>',
     icon: '❤️',
   },
   {
     id: 'quote',
     label: 'Quote the <a href="https://x.com/pixorb/status/2024151977609891874" target="_blank" rel="noopener">pinned tweet</a>',
-    caption: 'caption: "pixorb degen" & tag 3 orbs',
+    caption: 'caption: "pixorb degen"',
     icon: '🔁',
     requiresUrl: true,
   },
