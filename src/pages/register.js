@@ -8,12 +8,12 @@ import { navigate } from '../router.js';
 const tasks = [
   {
     id: 'like',
-    label: '<a href="https://x.com/pixorb/status/2024151977609891874" target="_blank" rel="noopener">Like, retweet and tag two orbs</a>',
+    label: '<a href="https://x.com/pixorb/status/2027428086132641844" target="_blank" rel="noopener">Like, retweet and tag two orbs</a>',
     icon: '❤️',
   },
   {
     id: 'quote',
-    label: 'Quote with caption "<a href="https://x.com/pixorb/status/2024151977609891874" target="_blank" rel="noopener">PIXORB</a>"',
+    label: 'Quote with caption "<a href="https://x.com/pixorb/status/2027428086132641844" target="_blank" rel="noopener">PIXORB</a>"',
     icon: '🔁',
     requiresUrl: true,
   },
