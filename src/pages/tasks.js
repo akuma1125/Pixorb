@@ -7,19 +7,14 @@ import { navigate } from '../router.js';
 
 const tasks = [
   {
-    id: 'follow',
-    label: 'Follow <a href="https://twitter.com/Pixorb" target="_blank" rel="noopener">PIXORB</a>',
-    icon: '👾',
-  },
-  {
     id: 'like',
-    label: 'Like, retweet and tag three orbs on the <a href="https://x.com/pixorb/status/2024151977609891874" target="_blank" rel="noopener">pinned tweet</a>',
+    label: 'Like, retweet and tag two orbs on the <a href="https://x.com/pixorb/status/2024151977609891874" target="_blank" rel="noopener">PIXORB</a>',
     icon: '❤️',
   },
   {
     id: 'quote',
-    label: 'Quote the <a href="https://x.com/pixorb/status/2024151977609891874" target="_blank" rel="noopener">pinned tweet</a>',
-    caption: 'caption: "pixorb degen"',
+    label: 'Quote <a href="https://x.com/pixorb/status/2024151977609891874" target="_blank" rel="noopener">PIXORB</a>',
+    caption: ' ',
     icon: '🔁',
     requiresUrl: true,
   },
