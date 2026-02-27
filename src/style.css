@@ -56,6 +56,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow-y: auto;
+  padding: 20px 16px;
 }
 
 /* ── Glass Panel ── */
@@ -64,10 +66,10 @@ body {
   backdrop-filter: blur(20px) saturate(1.4);
   -webkit-backdrop-filter: blur(20px) saturate(1.4);
   border: 1px solid var(--border-glow);
-  border-radius: 24px;
-  padding: 48px 40px;
-  max-width: 480px;
-  width: 90%;
+  border-radius: 20px;
+  padding: 36px 28px;
+  max-width: 460px;
+  width: 100%;
   text-align: center;
   box-shadow:
     0 0 40px rgba(0, 255, 204, 0.06),
@@ -114,25 +116,25 @@ body {
 h1 {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 2.6rem;
-  letter-spacing: 6px;
+  font-size: 2rem;
+  letter-spacing: 5px;
   text-transform: uppercase;
   background: linear-gradient(135deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   text-shadow: 0 0 40px var(--primary-glow);
 }
 
 h2 {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 1.2rem;
-  letter-spacing: 3px;
+  font-size: 1rem;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
   color: var(--text-secondary);
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
 p {
@@ -147,17 +149,17 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.1rem;
-  letter-spacing: 4px;
+  font-size: 1rem;
+  letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--bg-deep);
   background: linear-gradient(135deg, var(--primary), #00bbaa);
   border: none;
-  border-radius: 14px;
-  padding: 16px 48px;
+  border-radius: 12px;
+  padding: 13px 36px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -194,10 +196,45 @@ p {
   transform: translateX(-100%);
 }
 
+/* ── Register Sections ── */
+.register-section {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.section-number {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.section-num-badge {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: var(--bg-deep);
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  border-radius: 6px;
+  padding: 3px 7px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.section-num-label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
 /* ── Task List ── */
 .task-list {
   list-style: none;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
   text-align: left;
 }
 
@@ -205,12 +242,12 @@ p {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 14px;
-  padding: 16px 20px;
-  margin-bottom: 12px;
+  gap: 10px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
   background: rgba(0, 255, 204, 0.04);
   border: 1px solid rgba(0, 255, 204, 0.1);
-  border-radius: 14px;
+  border-radius: 12px;
   cursor: pointer;
   transition: all 0.25s ease;
   user-select: none;
@@ -273,7 +310,7 @@ p {
 
 /* ── Input Field ── */
 .input-group {
-  margin-bottom: 28px;
+  margin-bottom: 16px;
   text-align: left;
 }
 
@@ -365,7 +402,7 @@ p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 28px;
+  gap: 18px;
   opacity: 0;
   transform: scale(0.85);
   transition: opacity 1s ease, transform 1s cubic-bezier(0.22, 1, 0.36, 1);
@@ -379,8 +416,8 @@ p {
 .home-title {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 3.2rem;
-  letter-spacing: 10px;
+  font-size: 2.4rem;
+  letter-spacing: 8px;
   text-transform: uppercase;
   background: linear-gradient(135deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
@@ -414,10 +451,10 @@ p {
 
 .orb-image-wrapper {
   position: relative;
-  width: 420px;
-  height: 420px;
+  width: 300px;
+  height: 300px;
   cursor: pointer;
-  border-radius: 32px;
+  border-radius: 28px;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
   animation: orbFloat 4s ease-in-out infinite;
   outline: none;
@@ -777,111 +814,128 @@ p {
   #app {
     min-height: 100vh;
     min-height: 100dvh;
-    padding: 20px 12px;
-    align-items: flex-end;
+    padding: 16px 12px;
+    align-items: flex-start;
+    overflow-y: visible;
   }
 
   .glass-panel {
     max-width: 100%;
     width: 100%;
-    padding: 28px 20px;
-    border-radius: 18px;
-    margin-bottom: 20px;
+    padding: 24px 18px;
+    border-radius: 16px;
+    margin: auto;
   }
 
   h1 {
-    font-size: 1.8rem;
-    letter-spacing: 4px;
+    font-size: 1.6rem;
+    letter-spacing: 3px;
   }
 
   h2 {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     letter-spacing: 2px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
 
   p {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
   .logo-subtitle {
-    font-size: 0.85rem;
-    letter-spacing: 5px;
-    margin-bottom: 28px;
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
   }
 
   .btn-primary {
     width: 100%;
-    padding: 14px 24px;
-    font-size: 0.95rem;
-    letter-spacing: 3px;
-    border-radius: 12px;
-  }
-
-  .task-item {
-    padding: 14px 16px;
-    margin-bottom: 10px;
-    border-radius: 12px;
-    gap: 12px;
-  }
-
-  .task-label {
+    padding: 12px 20px;
     font-size: 0.9rem;
-  }
-
-  .task-checkbox {
-    width: 22px;
-    height: 22px;
-    border-radius: 6px;
-  }
-
-  .input-group label {
-    font-size: 0.7rem;
-  }
-
-  .input-field {
-    padding: 12px 14px;
-    font-size: 0.95rem;
+    letter-spacing: 2.5px;
     border-radius: 10px;
   }
 
+  .register-section {
+    margin-bottom: 14px;
+  }
+
+  .task-list {
+    margin-bottom: 8px;
+  }
+
+  .task-item {
+    padding: 10px 12px;
+    margin-bottom: 6px;
+    border-radius: 10px;
+    gap: 10px;
+  }
+
+  .task-label {
+    font-size: 0.88rem;
+  }
+
+  .task-checkbox {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+  }
+
+  .input-group {
+    margin-bottom: 12px;
+  }
+
+  .input-group label {
+    font-size: 0.68rem;
+  }
+
+  .input-field {
+    padding: 11px 13px;
+    font-size: 0.93rem;
+    border-radius: 9px;
+  }
+
   .success-icon {
-    width: 64px;
-    height: 64px;
-    font-size: 28px;
+    width: 58px;
+    height: 58px;
+    font-size: 26px;
   }
 
   .orb-image-wrapper {
-    width: 280px;
-    height: 280px;
+    width: 220px;
+    height: 220px;
   }
 
   .home-title {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     letter-spacing: 6px;
   }
 
   .home-tagline {
-    font-size: 0.85rem;
-    letter-spacing: 4px;
+    font-size: 0.82rem;
+    letter-spacing: 3px;
+  }
+
+  .home-hero {
+    gap: 14px;
   }
 }
 
 /* Small phones */
 @media (max-width: 380px) {
   .glass-panel {
-    padding: 22px 16px;
-    border-radius: 14px;
+    padding: 20px 14px;
+    border-radius: 12px;
   }
 
   h1 {
-    font-size: 1.5rem;
-    letter-spacing: 3px;
+    font-size: 1.4rem;
+    letter-spacing: 2.5px;
   }
 
   .btn-primary {
-    padding: 12px 20px;
-    font-size: 0.85rem;
+    padding: 11px 16px;
+    font-size: 0.82rem;
   }
 
   .task-label {
@@ -889,12 +943,12 @@ p {
   }
 
   .orb-image-wrapper {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
   }
 
   .home-title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     letter-spacing: 4px;
   }
 }

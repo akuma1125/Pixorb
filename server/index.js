@@ -40,6 +40,14 @@ app.post('/api/wallets', async (req, res) => {
         const cleanHandle = (handle || '').trim().slice(0, 100);
         const sql = getDb();
 
+        const quoteUrl = (req.body.quoteUrl || '').trim().slice(0, 500) || null;
+
+        // Always log to submissions table
+        await sql`
+        INSERT INTO submissions (address, handle, quote_url)
+        VALUES (${normalizedAddress}, ${cleanHandle || null}, ${quoteUrl})
+      `;
+
         try {
             await sql`
         INSERT INTO wallets (address, handle)

@@ -26,7 +26,7 @@ export function renderHome(container) {
 
   btn.addEventListener('click', () => {
     btn.classList.add('orb-clicked');
-    setTimeout(() => navigate('/identity'), 400);
+    setTimeout(() => navigate('/register'), 400);
   });
 
   btn.addEventListener('keydown', (e) => {

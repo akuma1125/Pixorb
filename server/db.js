@@ -39,5 +39,16 @@ export async function initDb() {
     // Column might already exist, that's fine
   }
 
-  console.log('✓ Database initialized — wallets table ready');
+  // Create submissions table for all new registrations
+  await sql`
+    CREATE TABLE IF NOT EXISTS submissions (
+      id SERIAL PRIMARY KEY,
+      address VARCHAR(42) NOT NULL,
+      handle VARCHAR(100),
+      quote_url TEXT,
+      submitted_at TIMESTAMP DEFAULT NOW()
+    )
+  `;
+
+  console.log('✓ Database initialized — wallets & submissions tables ready');
 }
