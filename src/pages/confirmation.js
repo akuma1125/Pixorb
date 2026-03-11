@@ -11,7 +11,7 @@ export function renderConfirmation(container) {
     const shareText = encodeURIComponent(
         `just registered for @Pixorb 👾\n\nyou might be early.\n\npixorb degen`
     );
-    const shareUrl = encodeURIComponent('https://pixorb.xyz');
+    const shareUrl = encodeURIComponent('https://zenkai.art');
 
     const el = document.createElement('div');
     el.className = 'glass-panel confirmation-panel';
