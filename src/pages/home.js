@@ -2,6 +2,8 @@
 // PIXORB — Home Page (Image Button)
 // ══════════════════════════════════════════════
 
+import { navigate } from '../router.js';
+
 export function renderHome(container) {
   const el = document.createElement('div');
   el.className = 'home-hero';
@@ -24,9 +26,7 @@ export function renderHome(container) {
 
   btn.addEventListener('click', () => {
     btn.classList.add('orb-clicked');
-    setTimeout(() => {
-      window.location.href = 'https://genesisglobe.xyz/';
-    }, 400);
+    setTimeout(() => navigate('/register'), 400);
   });
 
   btn.addEventListener('keydown', (e) => {
